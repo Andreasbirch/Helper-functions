@@ -17,15 +17,20 @@ rownames = npArr[:][0]
 
 data = numpy.empty((len(colnames),len(rownames)))
 for i in range(1,len(colnames)):
-    for j in range(1,len(colnames)):
-        data[i-1][j-1] = npArr[i][j]
-
+    print(i)
+    # for j in range(1,len(colnames)):
+    #     data[i-1][j-1] = npArr[i][j]
+for i in range(1, len(colnames)):
+    data[i-1][len(colnames)-1] = npArr[i][len(colnames)]
+    
+data[len(colnames)-1][:] = npArr[len(colnames)][1:]
 
 ##Calculate
 ## Density of nearest neighbours
 def KNN(list, K):
-    KNNIndices = numpy.argpartition(list, K)[1:K+1]
-
+    KNNIndices = numpy.argpartition(list, K+1)[1:K+1]
+    print(list)
+    print(KNNIndices)
     KNNValues = numpy.empty(K)
     for i in range(K):
         KNNValues[i] = list[KNNIndices[i]]
