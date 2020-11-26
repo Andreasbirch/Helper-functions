@@ -2,9 +2,8 @@ import numpy
 import sys
 
 rawTextInput = input("Paste ENTIRE Table here: ")
-trueClassesText = input("Type the groups as a list with indices separated by spaces. Do not use brackets: \nFor example: 1 1 1 1 1 2 2 3 3 3: \n")
-K = input("Type K, for nearest neighbour calculation: ")
-K = int(K)
+trueClassesText = input("Type the last index oi of each group (you dont have to include the first or last index), separated by spaces \nFor example 2 6 8 10: ")
+
 
 wrongCounter = 0
 rightCounter = 0
@@ -29,20 +28,29 @@ data[len(colnames)-1][:] = npArr[len(colnames)][1:]
 ##Setup class grouping
 trueClasses = numpy.asarray(trueClassesText.split())
 trueClasses = trueClasses.astype(int)
-noOfDifferentClasses = 1
-entryClass = trueClasses[0]
-trueClassRanges = []
+if(trueClasses[-1] != len(colnames)):
+    trueClasses = numpy.append(trueClasses, len(colnames))
 
-##Done reading data
-for i in range(noOfDifferentClasses+1):
-    for j in range(1,len(trueClasses)):
-        if(trueClasses[j] != entryClass):
-            noOfDifferentClasses += 1
-            trueClassRanges.append([entryClass, j])
-            entryClass = trueClasses[j]
+if(trueClasses[0] != 1 or trueClasses[0] != 0):
+    trueClasses = numpy.insert(trueClasses, 0, 0)
+
+
+##Create list of classes
+classCounter = 1
+classes = []
+
+for i in range(len(trueClasses)):
+    try:
+        for j in range(trueClasses[i], trueClasses[i+1]):
+            classes.append(classCounter)
+        classCounter += 1
+    except(IndexError):
+        break
+   
+print("interpreted input as following groups: ", classes)
+K = input("Type K, for nearest neighbour calculation: ")
+K = int(K)
     
-
-
 ##Calculate
 ## Density of nearest neighbours
 def KNN(list, K):
@@ -53,10 +61,54 @@ def KNN(list, K):
     return numpy.asarray([KNNIndices,KNNValues])
 
 
-##Run KNN with crossvalidation
-# for i in range(len(rownames)):
-#     neighbours = KNN(data[i], K)
-#     for j in range(len(neighbours)):
-#         # if(neighbours[0][j] != )
-#     print()
+def ContainsRepeats(list):
+    for i in range(len(list)):
+        try:
+            for j in range(i+1, len(list)):
+                if(list[i] == list[j]):
+                    return True
+        except:
+            print()
+    return False
+
+
+def DetermineClass(list):
+    if(ContainsRepeats(list)):    
+        noOfOccurences = 0
+        mostOccuringClass = 0
+        for i in range(len(list)):
+            counter = 0
+            try:
+                for j in range(i+1, len(list)):
+                    if(list[i] == list[j]):
+                        counter += 1
+            except:
+                print()
+            if(counter > noOfOccurences):
+                noOfOccurences = counter
+                mostOccuringClass = list[i]
+            
+        return [mostOccuringClass, noOfOccurences]
+
+
+for i in range(len(rownames)):
+    neighbours = KNN(data[i],K)
+    neighbourClasses = numpy.empty(len(neighbours[0]))
+    for j in range(len(neighbourClasses)):
+        neighbourClasses[j] = classes[int(neighbours[0][j])]
+        
+    if(ContainsRepeats(neighbourClasses) == False):
+        if(classes[i] != classes[int(neighbours[0][0])]):
+            wrongCounter += 1
+        else:
+            rightCounter += 1
+    else:
+        if(classes[i] != int(DetermineClass(neighbourClasses)[0])):
+            wrongCounter += 1
+        else:
+            rightCounter += 1
+    print()
+
+print("Error rate: ", wrongCounter, "/", (wrongCounter + rightCounter))
+print("Succes rate: ", rightCounter, "/", (wrongCounter + rightCounter))
     
