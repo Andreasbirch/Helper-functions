@@ -2,7 +2,7 @@ import numpy
 import sys
 
 rawTextInput = input("Paste ENTIRE Table here: ")
-trueClassesText = input("Type the groups as a list with indices separated by spaces. Do not use brackets: ")
+trueClassesText = input("Type the groups as a list with indices separated by spaces. Do not use brackets: \nFor example: 1 1 1 1 1 2 2 3 3 3: \n")
 K = input("Type K, for nearest neighbour calculation: ")
 K = int(K)
 
@@ -28,18 +28,17 @@ data[len(colnames)-1][:] = npArr[len(colnames)][1:]
 
 ##Setup class grouping
 trueClasses = numpy.asarray(trueClassesText.split())
+trueClasses = trueClasses.astype(int)
 noOfDifferentClasses = 1
 entryClass = trueClasses[0]
-trueClassRanges = numpy.empty(noOfDifferentClasses)
-trueClassRanges[0] = [1,2,3]
-sys.exit()
+trueClassRanges = []
 
 ##Done reading data
-for i in range(noOfDifferentClasses):
+for i in range(noOfDifferentClasses+1):
     for j in range(1,len(trueClasses)):
         if(trueClasses[j] != entryClass):
             noOfDifferentClasses += 1
-            trueClassRanges[i] = [entryClass, j]
+            trueClassRanges.append([entryClass, j])
             entryClass = trueClasses[j]
     
 
