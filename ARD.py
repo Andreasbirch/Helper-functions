@@ -12,15 +12,16 @@ K = int(K)
 
 ##Read data, setup
 npArr = numpy.asarray([i.split() for i in rawTextInput.split('\n')])
+if(len(npArr[0])==0):
+    npArr = npArr[1:]
+    
 colnames = npArr[0][:]
 rownames = npArr[:][0]
 
 data = numpy.empty((len(colnames),len(rownames)))
 for i in range(1,len(colnames)):
-    print(i)
-    # for j in range(1,len(colnames)):
-    #     data[i-1][j-1] = npArr[i][j]
-for i in range(1, len(colnames)):
+    for j in range(1,len(colnames)):
+        data[i-1][j-1] = npArr[i][j]
     data[i-1][len(colnames)-1] = npArr[i][len(colnames)]
     
 data[len(colnames)-1][:] = npArr[len(colnames)][1:]
@@ -28,9 +29,7 @@ data[len(colnames)-1][:] = npArr[len(colnames)][1:]
 ##Calculate
 ## Density of nearest neighbours
 def KNN(list, K):
-    KNNIndices = numpy.argpartition(list, K+1)[1:K+1]
-    print(list)
-    print(KNNIndices)
+    KNNIndices = numpy.argsort(list)[1:K+1]
     KNNValues = numpy.empty(K)
     for i in range(K):
         KNNValues[i] = list[KNNIndices[i]]
