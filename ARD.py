@@ -6,7 +6,7 @@ rawTextInput = input("Paste ENTIRE Table here: ")
 target = input("Type the number of row or column that needs to be searched: ")
 K = input("Type K, for nearest neighbour calculation: ")
 
-#Remove these before release
+
 target = int(target) - 1
 K = int(K)
 
