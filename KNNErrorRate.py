@@ -32,7 +32,7 @@ if(trueClasses[-1] != len(colnames)):
     trueClasses = numpy.append(trueClasses, len(colnames))
 
 if(trueClasses[0] != 1 or trueClasses[0] != 0):
-    trueClasses = numpy.insert(trueClasses, 0, 0)
+    trueClasses = numpy.append(0, trueClasses)
 
 
 ##Create list of classes
