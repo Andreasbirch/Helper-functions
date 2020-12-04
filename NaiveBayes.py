@@ -93,7 +93,6 @@ data = numpy.asarray([[0,	0,	0,	1,	0,	0,	0,	0,	0],
 trueClasses = numpy.asarray([0, 2, 5, 10])
 classes = [1, 1, 2, 2, 2, 3, 3, 3, 3, 3]
 features = numpy.asarray([[2, 0], [4, 1], [5, 0]])
-featuresMaube = features
 y = 2
 
 

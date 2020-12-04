@@ -58,4 +58,5 @@ for i in subDensities:
 
 
 ##Calculate ARD
+print("Nearest neighbours of o", str(target + 1), " is ", targetKNN[0]+1 )
 print("ARD: ", 1/(1/K*(LocalDensity(targetKNN)))/(1/K*(subDensitiesSum)))
