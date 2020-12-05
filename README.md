@@ -5,7 +5,7 @@ Functionality varies a bit, but the main goal is to solve some of the more tedio
 
 I added videos on how to run each script
 
-ANN.py - Average Relative Density
+ARD.py - Average Relative Density
 https://streamable.com/btjfk6
 
 KNNErrorRate.Py
