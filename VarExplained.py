@@ -12,6 +12,7 @@ npArr = numpy.asarray([i.split() for i in matrixSInput.split('\n')])
 if(len(npArr[0])==0):
     npArr = npArr[1:]
 npArr = numpy.char.replace(npArr,'−','-')
+npArr = numpy.char.replace(npArr,':','.')
 S = npArr.astype(float)
 
 sumOfPC = 0
