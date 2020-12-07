@@ -1,6 +1,8 @@
 import numpy
 from sklearn.cluster import KMeans
 import sys
+
+#%% Load data 
 colnamesText = input("Type the names of each Observation in the order they appear, separated by spaces \nFor example: O1 O3 O4 O2\n")
 rawTextInput = input("Paste the values of each observation, separated by spaces \nFor example: 3.14 2.2 1.1 0.5\n")
 k = input("Type final amount of clusters, k: ")
@@ -21,12 +23,11 @@ colnames = colnamesText.split(' ')
 centroids = centroids.split(' ')
 centroids = numpy.asarray(numpy.reshape(centroids, (-1,1)))
 centroids = centroids.astype(float)
-# Done loading data
+#%% Done loading data
 
 
-
-# FOR MANUAL INPUT UNCOMMENT AND INSERT HERE
-# Testinput Spring2017
+# # FOR MANUAL INPUT OUTCOMMENT LOAD DATA PART, UNCOMMENT THIS SECTION AND INSERT HERE
+# # Testinput Spring2017
 # data = [[19.4], 
 #         [30.3], 
 #         [34.2], 
@@ -36,10 +37,13 @@ centroids = centroids.astype(float)
 #         [50.9],
 #         [68.6]]
 # centroids = [[19.4],
-#              [30.3]]
+#               [30.3]]
+# centroids = numpy.asarray(numpy.reshape(centroids, (-1,1)))
+# centroids = centroids.astype(float)
+# data = numpy.asarray(numpy.reshape(data, (-1,1)))
 # colnames = ['O8', 'O6', 'O4', 'O2', 'O3', 'O1', 'O5', 'O7']
 # k = 2
-
+# %%
 
 kmeans = KMeans(n_clusters = k, init=centroids, n_init=1)
 kmeans.fit(data)
