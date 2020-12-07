@@ -47,6 +47,8 @@ dendrogram(z,
 plt.title(label="complete/maximum linkage")
 plt.show()
 
+
+
 z = linkage(distArray, method='single', metric='euclidean')
 
 plt.figure(figsize=(10, 7))
@@ -56,6 +58,20 @@ dendrogram(z,
             orientation='top',)
 plt.title(label="single/minimum linkage")
 plt.show()
+
+
+
+z = linkage(distArray, method='average', metric='euclidean')
+
+plt.figure(figsize=(10, 7))
+dendrogram(z,
+            labels=colnames,
+            distance_sort=False,
+            orientation='top',)
+plt.title(label="average linkage")
+plt.show()
+
+print("BE SURE YOU CHECK THE CORRECT PLOT WITH THE DESIRED LINKAGE")
 # nearestIndex = numpy.argsort(nearestList)[0]
 
 # return nearestList
