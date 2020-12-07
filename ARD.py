@@ -6,7 +6,9 @@ rawTextInput = input("Paste ENTIRE Table here: ")
 target = input("Type the number of row or column that needs to be searched: ")
 K = input("Type K, for nearest neighbour calculation: ")
 
-
+target = target.replace('O', '')
+target = target.replace('o', '')
+target = target.replace(' ', '')
 target = int(target) - 1
 K = int(K)
 
@@ -38,7 +40,10 @@ def KNN(list, K):
 def LocalDensity(list):
     localSum = 0
     for i in range(len(list)):
-        localSum = localSum + list[1][i]
+        try:
+            localSum = localSum + list[1][i]
+        except(IndexError):
+            return list[1][0]
     return localSum
 
 targetKNN = KNN(data[target], K)
