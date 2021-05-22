@@ -6,10 +6,13 @@ Functionality varies a bit, but the main goal is to solve some of the more tedio
 I added videos on how to run each script
 
 ARD.py - Average Relative Density
-https://streamable.com/btjfk6
+https://streamable.com/7z8plu
 
 KNNErrorRate.Py
-https://streamable.com/2jveee
+https://streamable.com/f6x0kw
 
 VarExplained.Py - Variance explained by principal components
-https://streamable.com/779bxh
+https://streamable.com/552tci
+
+Dendrogram
+https://streamable.com/faa8hs
